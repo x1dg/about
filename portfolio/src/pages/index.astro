@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Danil Cherdantsev — .NET Backend Developer">
 
 <!-- ASCII Banner -->
-<div class="ascii-banner">
+<div class="ascii-banner" data-text="DANIL">
  ██████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗
 ██╔════╝██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██║
 ██║     ██║   ██║██╔████╔██║██║██╔██╗ ██║███████║██║
@@ -13,14 +13,21 @@ import Layout from '../layouts/Layout.astro';
  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
 </div>
 
+<!-- Boot Progress -->
+<div class="progress-container">
+  <div class="progress-bar">
+    <div class="progress-fill">0%</div>
+  </div>
+</div>
+
 <!-- System Boot -->
 <div class="command-output">
-  <strong>SYS</strong> [OK] Portfolio v1.0 loaded<br/>
-  <strong>ROLE</strong> [OK] .NET Backend Developer<br/>
-  <strong>EXP</strong> [OK] 7+ years in high-load systems<br/>
-  <strong>STACK</strong> [OK] .NET / C# / RabbitMQ / PostgreSQL<br/>
-  <strong>STATUS</strong> [OK] Open to opportunities<br/><br/>
-  System ready. Scroll to explore.
+  <div class="boot-line"><strong>SYS</strong> [OK] Portfolio v1.0 loaded</div>
+  <div class="boot-line"><strong>ROLE</strong> [OK] .NET Backend Developer</div>
+  <div class="boot-line"><strong>EXP</strong> [OK] 7+ years in high-load systems</div>
+  <div class="boot-line"><strong>STACK</strong> [OK] .NET / C# / RabbitMQ / PostgreSQL</div>
+  <div class="boot-line"><strong>STATUS</strong> [OK] Open to opportunities</div>
+  <div class="boot-line"><br/>System ready. Scroll to explore.</div>
 </div>
 
 <hr class="section-divider" />
