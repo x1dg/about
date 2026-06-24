@@ -19,42 +19,7 @@ const { title } = Astro.props;
   <body>
     <div class="scanline"></div>
 
-    <!-- Post-apocalyptic pixel background -->
-    <div class="apocalypse-bg">
-      <!-- Ruined buildings silhouette -->
-      <div class="buildings">
-        <div class="building b1"></div>
-        <div class="building b2"></div>
-        <div class="building b3"></div>
-        <div class="building b4"></div>
-        <div class="building b5"></div>
-        <div class="building b6"></div>
-        <div class="building b7"></div>
-        <div class="building b8"></div>
-        <div class="building b9"></div>
-        <div class="building b10"></div>
-        <div class="building b11"></div>
-        <div class="building b12"></div>
-      </div>
-      <!-- Pixel helicopters -->
-      <div class="helicopter h1">
-        <div class="heli-body"></div>
-        <div class="heli-blade"></div>
-        <div class="heli-tail"></div>
-      </div>
-      <div class="helicopter h2">
-        <div class="heli-body"></div>
-        <div class="heli-blade"></div>
-        <div class="heli-tail"></div>
-      </div>
-      <div class="helicopter h3">
-        <div class="heli-body"></div>
-        <div class="heli-blade"></div>
-        <div class="heli-tail"></div>
-      </div>
-      <!-- Dust particles -->
-      <div class="dust"></div>
-    </div>
+
 
     <div class="container">
       <div class="terminal">
@@ -148,6 +113,20 @@ const { title } = Astro.props;
             closeModal();
           }
         });
+
+        // Visitor counter
+        const counterEl = document.getElementById('visitor-count');
+        if (counterEl) {
+          fetch('https://api.countapi.xyz/hit/x1dg-portfolio/visitors')
+            .then(r => r.json())
+            .then(data => {
+              counterEl.textContent = data.value.toLocaleString();
+            })
+            .catch(() => {
+              counterEl.textContent = 'unavailable';
+              counterEl.style.color = 'var(--fg-muted)';
+            });
+        }
       });
     </script>
   </body>
