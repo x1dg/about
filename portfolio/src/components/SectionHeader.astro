@@ -1,0 +1,17 @@
+---
+interface Props {
+  path: string;
+  command?: string;
+}
+const { path, command } = Astro.props;
+---
+<div class="prompt-line">
+  <span class="prompt">x1dg@portfolio:</span><span class="prompt-path">{path}</span>
+</div>
+
+{command && (
+  <div class="prompt-line">
+    <span class="prompt">x1dg@portfolio:{path}$</span>
+    <span class="command">{command}</span>
+  </div>
+)}
