@@ -528,7 +528,8 @@ a:hover {
   height: 180px;
   display: flex;
   align-items: flex-end;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 5%;
 }
 
 .building {
@@ -677,17 +678,20 @@ a:hover {
 /* Helicopter positions & flight paths */
 .h1 {
   top: 15%;
+  left: -80px;
   animation: fly-right 25s linear infinite;
 }
 
 .h2 {
   top: 25%;
+  right: -80px;
   animation: fly-left 35s linear infinite;
   animation-delay: -10s;
 }
 
 .h3 {
   top: 8%;
+  left: -80px;
   animation: fly-right 45s linear infinite;
   animation-delay: -20s;
 }
