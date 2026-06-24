@@ -71,6 +71,17 @@ const { title } = Astro.props;
         </div>
       </div>
     </div>
+
+    <!-- Image Modal -->
+    <div class="modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Image preview">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close">[X]</button>
+        <img src="" alt="" class="modal-img" />
+        <p class="modal-caption"></p>
+      </div>
+    </div>
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         // Boot sequence animation
@@ -96,6 +107,47 @@ const { title } = Astro.props;
             progressFill.textContent = Math.floor(progress) + '%';
           }, 100);
         }
+
+        // Image Modal
+        const modal = document.getElementById('image-modal');
+        const modalImg = modal.querySelector('.modal-img');
+        const modalCaption = modal.querySelector('.modal-caption');
+        const modalClose = modal.querySelector('.modal-close');
+        const modalBackdrop = modal.querySelector('.modal-backdrop');
+
+        function openModal(src, alt, caption) {
+          modalImg.src = src;
+          modalImg.alt = alt;
+          modalCaption.textContent = caption || '';
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          modalImg.src = '';
+        }
+
+        // Gallery click handlers
+        document.querySelectorAll('.gallery-link').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const src = btn.dataset.src;
+            const alt = btn.dataset.alt;
+            const caption = btn.querySelector('.gallery-caption')?.textContent || '';
+            openModal(src, alt, caption);
+          });
+        });
+
+        // Close handlers
+        modalClose.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.classList.contains('open')) {
+            closeModal();
+          }
+        });
       });
     </script>
   </body>
