@@ -6,12 +6,12 @@ interface Props {
 const { path, command } = Astro.props;
 ---
 <div class="prompt-line">
-  <span class="prompt">x1dg@portfolio:</span><span class="prompt-path">{path}</span>
+  <span class="prompt">x1dg@dev:</span><span class="prompt-path">{path}</span>
 </div>
 
 {command && (
   <div class="prompt-line">
-    <span class="prompt">x1dg@portfolio:{path}$</span>
+    <span class="prompt">x1dg@dev:{path}$</span>
     <span class="command">{command}</span>
   </div>
 )}
