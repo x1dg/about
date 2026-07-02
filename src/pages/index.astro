@@ -5,6 +5,10 @@ import ProjectItem from '../components/ProjectItem.astro';
 import ContactLink from '../components/ContactLink.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import GalleryItem from '../components/GalleryItem.astro';
+import RecommendationItem from '../components/RecommendationItem.astro';
+import CvDownload from '../components/CvDownload.astro';
+
+const imageBase = `${import.meta.env.BASE_URL}images/`;
 
 const skills = [
   'C#, C++, Python',
@@ -31,14 +35,16 @@ const skills = [
 const contacts = [
   { label: 'GITHUB', href: 'https://github.com/x1dg', value: 'github.com/x1dg' },
   { label: 'TELEGRAM', href: 'https://t.me/null_ref_ex', value: '@null_ref_ex' },
-  { label: 'EMAIL', href: 'mailto:danilnorm@gmail.com', value: 'danilnorm@gmail.com' },
-  { label: 'PHONE', href: 'https://linkedin.com', value: '+7 (912) 653-02-02' },
+  { label: 'EMAIL', href: 'mailto:danilnorm@gmail.com', value: 'danilnorm@gmail.com', external: false },
+  { label: 'PHONE', href: 'tel:+79126530202', value: '+7 (912) 653-02-02', external: false },
 ];
 ---
-<Layout title="Danil Cherdantsev — .NET Backend Developer">
+<Layout
+  title="Danil Cherdantsev — .NET Backend Developer"
+  description="Senior .NET Backend Developer from Yekaterinburg, Russia. 7+ years in high-load microservices — Insurance, GameDev (Warface). Kafka, PostgreSQL, Kubernetes."
+>
 
-<!-- ASCII Banner -->
-<div class="ascii-banner" data-text="DANIL">
+<div class="ascii-banner" data-text="X1DG">
 ██╗  ██╗ ██╗██████╗ ███████╗███████╗██████╗ 
 ╚██╗██╔╝███║██╔══██╗██╔════╝██╔════╝██╔══██╗
  ╚███╔╝ ╚██║██████╔╝█████╗  █████╗  ██████╔╝
@@ -47,16 +53,14 @@ const contacts = [
 ╚═╝  ╚═╝ ╚═╝╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝
 </div>
 
-<!-- Boot Progress -->
 <div class="progress-container">
   <div class="progress-bar">
     <div class="progress-fill">0%</div>
   </div>
 </div>
 
-<!-- System Boot -->
 <div class="command-output">
-  <div class="boot-line"><strong>SYS</strong> [OK] Portfolio v1.0 loaded</div>
+  <div class="boot-line"><strong>SYS</strong> [OK] Portfolio v2.0 loaded</div>
   <div class="boot-line"><strong>ROLE</strong> [OK] .NET Backend Developer</div>
   <div class="boot-line"><strong>EXP</strong> [OK] 7+ years in high-load systems</div>
   <div class="boot-line"><strong>STACK</strong> [OK] .NET / C# / RabbitMQ / PostgreSQL</div>
@@ -64,26 +68,26 @@ const contacts = [
   <div class="boot-line"><br/>System ready. Scroll to explore.</div>
 </div>
 
-<!-- Navigation -->
+<CvDownload />
+
 <nav class="terminal-nav">
   <a href="#about" class="nav-link">~/about</a>
-  <a href="#experience" class="nav-link">~/experience</a>
-  <a href="#skills" class="nav-link">~/skills</a>
-  <a href="#stalker" class="nav-link">~/stalker-mods</a>
+  <a href="#projects" class="nav-link">~/projects</a>
+  <a href="#recommendations" class="nav-link">~/recommendations</a>
+  <a href="#hobby" class="nav-link">~/hobby</a>
   <a href="#gallery" class="nav-link">~/gallery</a>
   <a href="#contact" class="nav-link">~/contact</a>
 </nav>
 
 <hr class="section-divider" />
 
-<!-- About -->
 <div id="about"></div>
 <SectionHeader path="~/about" command=" whoami" />
 <div class="command-output">
-  <strong>Даниил Черданцев</strong> — Senior .NET Backend Developer из Екатеринбурга<br/>
-  7+ лет опыта в FinTech, Insurance и GameDev<br/>
-  Специализируюсь на высоконагруженных микросервисных системах<br/>
-  GitHub: <a href="https://github.com/x1dg" target="_blank">x1dg</a>
+  <strong>Danil Cherdantsev</strong> — Senior .NET Backend Developer, Yekaterinburg, Russia<br/>
+  7+ years building high-load microservices for Insurance and GameDev<br/>
+  Focus: event-driven architecture, database performance, production reliability<br/>
+  GitHub: <a href="https://github.com/x1dg" target="_blank" rel="noopener">x1dg</a>
 </div>
 
 <SectionHeader path="~/about" command=" cat ./skills.txt" />
@@ -95,21 +99,20 @@ const contacts = [
 <SectionHeader path="~/about" command=" cat ./background.txt" />
 <div class="command-output">
   Previously: Astrum Entertainment (Warface, 20k CCU)<br/>
-  Previously: Сравни.ру (Insurance, 15+ integrations)<br/>
-  Previously: КНОПКА & ХОСТ<br/>
+  Previously: Sravni.ru (Insurance, 15+ integrations)<br/>
+  Previously: KNOPKA & HOST<br/>
   UrFU — Computer Science, 2020<br/>
   English: B2
 </div>
 
 <hr class="section-divider" />
 
-<!-- Experience -->
-<div id="experience"></div>
-<SectionHeader path="~/experience" command=" ls -la" />
+<div id="projects"></div>
+<SectionHeader path="~/projects" command=" ls -la" />
 
 <ProjectItem
   name="astrum-entertainment/"
-  period="[2025]"
+  period="[2021 — 2025, 4 years]"
   description=".NET Developer — Warface (online shooter, 20k CCU). .NET 5/8, C++, CryENGINE 3, MySQL, RabbitMQ."
   highlights="API -30% latency, weapon stickers system (99.5% success), matchmaking 45s → 25s, fixed 12 memory leaks (-2.5GB RAM)"
 />
@@ -137,73 +140,82 @@ const contacts = [
 
 <hr class="section-divider" />
 
-<!-- Key Metrics -->
-<SectionHeader path="~/metrics" command=" cat ./achievements.md" />
+<SectionHeader path="~/projects" command=" cat ./achievements.md" />
 <div class="command-output metrics-output">
   <strong>30%</strong> API latency reduction @ Warface<br/>
   <strong>99.5%</strong> Success rate for stickers system @ Warface<br/>
-  <strong>300k RUB/mo</strong> Cost savings @ Сравни.ру<br/>
-  <strong>15-20×</strong> Reporting speedup @ ХОСТ<br/>
+  <strong>300k RUB/mo</strong> Infrastructure savings @ Sravni.ru<br/>
+  <strong>15-20×</strong> Reporting speedup @ HOST<br/>
   <strong>12</strong> Memory leaks fixed @ Warface (-2.5GB RAM)<br/>
-  <strong>150k</strong> Transactions/month @ Сравни.ру<br/>
+  <strong>150k</strong> Transactions/month @ Sravni.ru<br/>
 </div>
 
 <hr class="section-divider" />
 
-<!-- STALKER Mods -->
-<div id="stalker"></div>
-<SectionHeader path="~/stalker-mods" command=" ls -la" />
+<div id="recommendations"></div>
+<SectionHeader path="~/recommendations" command=" cat ./references.txt" />
+
+<RecommendationItem
+  name="Valeriy Terekhov"
+  role="Tech Lead"
+  company="SRAVNI"
+  context="Former tech lead at Sravni.ru. We worked together on the OSAGO platform: microservices decomposition, CQRS, database migrations, and developer onboarding."
+  note="Reference available upon request"
+/>
+
+<hr class="section-divider" />
+
+<div id="hobby"></div>
+<SectionHeader path="~/hobby" command=" ls -la ./stalker-mods" />
 
 <ProjectItem
   name="priboi-story-eternal/"
-  period="[2021 — н.в., OGSR Engine]"
-  description=`Адаптация легендарного мода "Прибой" на движок OGSR. Полная переработка: новый интерфейс, оружейный пак, анимации, погода.`
+  period="[2021 — present, OGSR Engine]"
+  description={`Port of the classic "Priboi Story" mod to the OGSR engine. Full overhaul: new UI, weapon pack, animations, weather.`}
 >
   <div class="mod-extra">
-    <div class="mod-label">// Отзывы с форума:</div>
-    <div class="project-desc quote">"Изменения порадовали, так что буду ждать старичка Фотографа" — Maximouse</div>
-    <div class="project-desc quote">"Хорошее дело делаете!" — Бурбон</div>
-    <div class="project-desc quote">"Вах красавчики, желаю терпения и удачи" — Mervin62</div>
+    <div class="mod-label">// Community feedback:</div>
+    <div class="project-desc quote">"The changes are great — waiting for the Photographer sequel" — Maximouse</div>
+    <div class="project-desc quote">"Great work you're doing!" — Bourbon</div>
+    <div class="project-desc quote">"Awesome stuff, good luck and patience" — Mervin62</div>
   </div>
   <div class="mod-extra">
-    <a href="https://ap-pro.ru/forums/topic/2963-priboi-story-%E2%80%94-eternal-ogsr/" target="_blank" class="project-link">→ ap-pro.ru/forums/topic/2963</a>
+    <a href="https://ap-pro.ru/forums/topic/2963-priboi-story-%E2%80%94-eternal-ogsr/" target="_blank" rel="noopener" class="project-link">→ ap-pro.ru/forums/topic/2963</a>
   </div>
 </ProjectItem>
 
 <ProjectItem
   name="fotograf-selfmade/"
-  period="[2022 — н.в., OGSR Engine, в разработке]"
-  description=`Глобальное переосмысление мода "Фотограф" на OGSR. Новые квесты, диалоги, интерфейс, оружие на ЗП-руках.`
-  highlights="Команда: 1beer, Nimi, Paracetamol, ZonaChe"
+  period="[2022 — present, OGSR Engine, in development]"
+  description={`Complete reimagining of the "Photographer" mod on OGSR. New quests, dialogues, UI, first-person weapon animations.`}
+  highlights="Team: 1beer, Nimi, Paracetamol, ZonaChe"
 >
-  <div class="project-desc">→ ~85% готовности, ОБТ вышел 04.11.2022</div>
+  <div class="project-desc">→ ~85% complete, open beta released Nov 4, 2022</div>
   <div class="mod-extra">
     <div class="mod-label">// Discord:</div>
-    <div class="project-desc">→ <a href="https://discord.gg/9fpMWDmGqk" target="_blank" class="project-link">discord.gg/9fpMWDmGqk</a></div>
+    <div class="project-desc">→ <a href="https://discord.gg/9fpMWDmGqk" target="_blank" rel="noopener" class="project-link">discord.gg/9fpMWDmGqk</a></div>
   </div>
   <div class="mod-extra">
-    <a href="https://ap-pro.ru/forums/topic/3329-fotograf-selfmade/" target="_blank" class="project-link">→ ap-pro.ru/forums/topic/3329</a>
+    <a href="https://ap-pro.ru/forums/topic/3329-fotograf-selfmade/" target="_blank" rel="noopener" class="project-link">→ ap-pro.ru/forums/topic/3329</a>
   </div>
 </ProjectItem>
 
 <hr class="section-divider" />
 
-<!-- Gallery -->
 <div id="gallery"></div>
 <SectionHeader path="~/gallery" command=" ls -la ./photos" />
 <div class="gallery-grid">
-  <GalleryItem src="/about/images/donil.jpg" alt="Danil Cherdantsev" caption="donil.jpg" />
-  <GalleryItem src="/about/images/donil2.jpg" alt="Danil Cherdantsev" caption="donil2.jpg" />
-  <GalleryItem src="/about/images/donil3.jpg" alt="Danil Cherdantsev" caption="donil3.jpg" />
+  <GalleryItem src={`${imageBase}donil.jpg`} alt="Danil Cherdantsev" caption="photo_001.jpg" />
+  <GalleryItem src={`${imageBase}donil2.jpg`} alt="Danil Cherdantsev" caption="photo_002.jpg" />
+  <GalleryItem src={`${imageBase}donil3.jpg`} alt="Danil Cherdantsev" caption="photo_003.jpg" />
 </div>
 
 <hr class="section-divider" />
 
-<!-- Contact -->
 <div id="contact"></div>
 <SectionHeader path="~/contact" command=" cat ./links.txt" />
 <div class="contact-links">
-  {contacts.map(c => <ContactLink label={c.label} href={c.href} value={c.value} />)}
+  {contacts.map(c => <ContactLink label={c.label} href={c.href} value={c.value} external={c.external} />)}
 </div>
 
 <hr class="section-divider" />

@@ -3,10 +3,16 @@ interface Props {
   label: string;
   href: string;
   value: string;
+  external?: boolean;
 }
-const { label, href, value } = Astro.props;
+const { label, href, value, external = true } = Astro.props;
+const isExternal = external && !href.startsWith('mailto:') && !href.startsWith('tel:');
 ---
-<a class="contact-link" href={href} target="_blank" rel="noopener">
+<a
+  class="contact-link"
+  href={href}
+  {...(isExternal ? { target: '_blank', rel: 'noopener' } : {})}
+>
   <span class="contact-label">{label}</span>
   <span class="contact-value">→ {value}</span>
 </a>
