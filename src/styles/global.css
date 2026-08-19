@@ -507,75 +507,249 @@ a:hover {
   .skills-list { grid-template-columns: 1fr; }
 }
 
-/* --- CV Download --- */
-.cv-download {
+/* --- Post-Apocalyptic Pixel Background --- */
+.apocalypse-bg {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ruined buildings - only on sides, low, light */
+.buildings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid var(--accent);
-  border-radius: var(--radius-md);
-  background: rgba(255, 107, 43, 0.08);
-  text-decoration: none !important;
-  transition: all 0.2s;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 10%;
 }
 
-.cv-download:hover {
-  background: rgba(255, 107, 43, 0.15);
-  box-shadow: 0 0 16px rgba(255, 107, 43, 0.15);
+.building {
+  background: #4a3a5a;
+  image-rendering: pixelated;
+  position: relative;
+  border: 1px solid rgba(255, 107, 43, 0.2);
+  box-shadow: 
+    inset 0 0 30px rgba(255, 107, 43, 0.1),
+    0 0 20px rgba(255, 107, 43, 0.08);
+  opacity: 0.7;
 }
 
-.cv-download-prompt {
-  color: var(--accent);
-  font-weight: 700;
+.building::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 8px,
+    rgba(255, 107, 43, 0.03) 8px,
+    rgba(255, 107, 43, 0.03) 10px
+  );
 }
 
-.cv-download-cmd {
-  color: var(--fg-muted);
-  font-size: 0.85rem;
+/* Window lights (scattered orange dots) */
+.building::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 4px;
+  right: 4px;
+  bottom: 0;
+  background:
+    radial-gradient(2px 2px at 20% 15%, rgba(255, 107, 43, 0.6), transparent),
+    radial-gradient(2px 2px at 60% 30%, rgba(255, 107, 43, 0.4), transparent),
+    radial-gradient(2px 2px at 80% 50%, rgba(255, 140, 66, 0.5), transparent),
+    radial-gradient(2px 2px at 30% 70%, rgba(255, 107, 43, 0.3), transparent),
+    radial-gradient(2px 2px at 70% 85%, rgba(255, 140, 66, 0.4), transparent);
 }
 
-.cv-download-label {
-  color: var(--accent);
-  font-weight: 600;
-  margin-left: auto;
-  font-size: 0.85rem;
+/* Individual building shapes — low ruins on sides only */
+.b1  { width: 35px; height: 60px; clip-path: polygon(0 30%, 40% 0, 100% 10%, 100% 100%, 0 100%); }
+.b2  { width: 45px; height: 75px; clip-path: polygon(0 0, 50% 5%, 100% 0, 100% 100%, 0 100%); }
+.b3  { width: 30px; height: 50px; clip-path: polygon(0 20%, 50% 0, 100% 15%, 100% 100%, 0 100%); }
+.b4  { width: 50px; height: 80px; clip-path: polygon(0 10%, 30% 0, 70% 5%, 100% 0, 100% 100%, 0 100%); }
+.b5  { width: 28px; height: 45px; clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%); }
+.b6  { width: 40px; height: 70px; clip-path: polygon(0 15%, 40% 0, 100% 5%, 100% 100%, 0 100%); }
+.b7  { width: 22px; height: 55px; clip-path: polygon(0 25%, 60% 0, 100% 20%, 100% 100%, 0 100%); }
+.b8  { width: 55px; height: 65px; clip-path: polygon(0 0, 30% 5%, 60% 0, 100% 0, 100% 100%, 0 100%); }
+.b9  { width: 38px; height: 58px; clip-path: polygon(0 10%, 45% 0, 100% 10%, 100% 100%, 0 100%); }
+.b10 { width: 30px; height: 40px; clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%); }
+.b11 { width: 48px; height: 72px; clip-path: polygon(0 5%, 35% 0, 100% 5%, 100% 100%, 0 100%); }
+.b12 { width: 32px; height: 48px; clip-path: polygon(0 15%, 50% 0, 100% 15%, 100% 100%, 0 100%); }
+
+/* Pixel helicopters */
+.helicopter {
+  position: absolute;
+  image-rendering: pixelated;
+  z-index: 10;
+  transform: scale(2);
 }
 
-/* --- Recommendations --- */
-.recommendation-item {
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  margin-bottom: 0.75rem;
-  background: rgba(255, 255, 255, 0.02);
-  transition: all 0.2s;
+.heli-body {
+  width: 32px;
+  height: 12px;
+  background: #3a2a4a;
+  border: 2px solid rgba(255, 107, 43, 0.8);
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 107, 43, 0.5);
 }
 
-.recommendation-item:hover {
-  border-color: var(--accent);
-  background: rgba(255, 107, 43, 0.03);
+.heli-body::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 6px;
+  width: 16px;
+  height: 6px;
+  background: #3a2a4a;
+  border: 2px solid rgba(255, 107, 43, 0.6);
+  border-bottom: none;
+  box-shadow: 0 0 10px rgba(255, 107, 43, 0.3);
 }
 
-.recommendation-header {
-  margin-bottom: 0.5rem;
+.heli-blade {
+  position: absolute;
+  top: -10px;
+  left: 4px;
+  width: 28px;
+  height: 4px;
+  background: rgba(255, 107, 43, 1);
+  animation: blade-spin 0.1s linear infinite;
+  transform-origin: center;
+  box-shadow: 0 0 10px rgba(255, 107, 43, 0.8);
 }
 
-.recommendation-name {
-  color: var(--fg);
-  font-weight: 600;
+.heli-tail {
+  position: absolute;
+  top: 4px;
+  right: -14px;
+  width: 14px;
+  height: 5px;
+  background: #3a2a4a;
+  border: 2px solid rgba(255, 107, 43, 0.6);
 }
 
-.recommendation-role {
-  color: var(--blue);
-  font-size: 0.9rem;
+.heli-tail::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  background: #3a2a4a;
+  border: 2px solid rgba(255, 107, 43, 0.6);
 }
 
-.recommendation-note {
-  margin-top: 0.5rem;
-  font-style: italic;
+/* Helicopter searchlight */
+.heli-body::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: 12px;
+  width: 4px;
+  height: 30px;
+  background: linear-gradient(to bottom, rgba(255, 107, 43, 0.8), transparent);
+  animation: searchlight 2s ease-in-out infinite alternate;
+  box-shadow: 0 0 12px rgba(255, 107, 43, 0.6);
+}
+
+@keyframes blade-spin {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(0.3); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes searchlight {
+  0% { transform: rotate(-15deg); opacity: 0.6; }
+  100% { transform: rotate(15deg); opacity: 1; }
+}
+
+/* Helicopter positions & flight paths */
+.h1 {
+  top: 10%;
+  left: -120px;
+  animation: fly-right 25s linear infinite;
+}
+
+.h2 {
+  top: 20%;
+  right: -120px;
+  animation: fly-left 35s linear infinite;
+  animation-delay: -10s;
+}
+
+.h3 {
+  top: 4%;
+  left: -120px;
+  animation: fly-right 45s linear infinite;
+  animation-delay: -20s;
+}
+
+.h2 .heli-body {
+  transform: scaleX(-1);
+}
+
+.h2 .heli-tail {
+  right: auto;
+  left: -10px;
+  transform: scaleX(-1);
+}
+
+.h2 .heli-blade {
+  left: auto;
+  right: 2px;
+}
+
+.h2 .heli-body::after {
+  left: auto;
+  right: 8px;
+}
+
+@keyframes fly-right {
+  0% { left: -120px; }
+  100% { left: 110%; }
+}
+
+@keyframes fly-left {
+  0% { right: -120px; left: auto; }
+  100% { right: 110%; left: auto; }
+}
+
+/* Dust / ash particles */
+.dust {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 107, 43, 0.3), transparent),
+    radial-gradient(1px 1px at 25% 45%, rgba(255, 140, 66, 0.2), transparent),
+    radial-gradient(1px 1px at 40% 10%, rgba(255, 107, 43, 0.25), transparent),
+    radial-gradient(1px 1px at 55% 60%, rgba(255, 140, 66, 0.15), transparent),
+    radial-gradient(1px 1px at 70% 35%, rgba(255, 107, 43, 0.2), transparent),
+    radial-gradient(1px 1px at 85% 55%, rgba(255, 140, 66, 0.3), transparent),
+    radial-gradient(1px 1px at 15% 75%, rgba(255, 107, 43, 0.15), transparent),
+    radial-gradient(1px 1px at 60% 80%, rgba(255, 140, 66, 0.2), transparent),
+    radial-gradient(1px 1px at 90% 15%, rgba(255, 107, 43, 0.25), transparent),
+    radial-gradient(1px 1px at 35% 90%, rgba(255, 140, 66, 0.15), transparent);
+  animation: dust-fall 20s linear infinite;
+}
+
+@keyframes dust-fall {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
 }
 
 /* Gallery */
@@ -737,10 +911,13 @@ a:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Responsive: smaller buildings on mobile */
 @media (max-width: 600px) {
+  .buildings { height: 100px; }
+  .building { transform: scale(0.6); }
+  .helicopter { transform: scale(0.7); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .modal-close { top: -2.5rem; font-size: 0.75rem; padding: 0.4rem 0.8rem; }
-  .cv-download-label { margin-left: 0; width: 100%; }
 }
 
 /* Reduced motion */
@@ -752,6 +929,13 @@ a:hover {
     transition: none !important;
   }
 
+  .helicopter,
+  .heli-blade,
+  .heli-body::after,
+  .dust {
+    animation: none !important;
+  }
+  
   * {
     transition-duration: 0.01ms !important;
   }
